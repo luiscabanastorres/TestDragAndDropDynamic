@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             var item = ItemParent()
             item.id = x
             item.title = "Columna $x"
-            for (y in 1..4){
+            for (y in 1..10){
                 var child = ItemParent()
                 child.id = x
                 child.title = "Tarea $current"
