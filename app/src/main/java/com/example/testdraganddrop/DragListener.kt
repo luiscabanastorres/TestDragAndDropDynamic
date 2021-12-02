@@ -88,6 +88,7 @@ class DragListener: View.OnDragListener {
                 }
 
                 if (viewSource != null) {
+                    //Se obtiene el adaptador del cual se toma el item
                     val source = viewSource.parent.parent as RecyclerView
                     val adapterSource: ChildAdapter? = source.adapter as ChildAdapter?
                     val positionSource = viewSource.tag as Int
@@ -97,15 +98,19 @@ class DragListener: View.OnDragListener {
                     val listSource: ArrayList<ItemParent> = arrayListOf()
                     listSource.addAll(adapterSource.getList())
 
+                    //Se elimina el item para pasarlo al adaptador en donde lo arrastro y se refresca el recycler
                     listSource.removeAt(positionSource)
                     adapterSource.setData(listSource, this)
 
+
+                    //Se obtiene el adaptador hacia donde se arrastro
                     val adapterTarget: ChildAdapter = target?.adapter as ChildAdapter
                     val customListTarget: ArrayList<ItemParent> = arrayListOf()
                     customListTarget.addAll(adapterTarget.getList())
 
+                    //Se agrega el elemento en el recycler hacia donde se arrastro
                     if (positionTarget >= 0) {
-                        customListTarget.add(positionTarget, list)
+                        customListTarget.add(positionTarget, list) //Si se arrastra sobre el mismo recycler se toma la posición del elemento para cambiar el orden
                     } else {
                         customListTarget.add(list)
                     }
